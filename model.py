@@ -1,7 +1,8 @@
 import pandas
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.tree               import DecisionTreeClassifier
+from sklearn.model_selection    import train_test_split
+from sklearn.metrics            import accuracy_score
+from sklearn.neighbors          import KNeighborsClassifier
 
 data            = pandas.read_csv("data/2015 Stack Overflow Developer Survey Responses.csv", header=1)
 data            = data[pandas.notnull(data["Compensation"]) & (data["Compensation"] != 'Rather not say')]
@@ -39,6 +40,14 @@ model = DecisionTreeClassifier()
 model.fit(features_train, target_train)
 predictions = model.predict(features_test)
 
-
 accuracy = accuracy_score(predictions, target_test)
 print "DT Accuracy Score: %f" % accuracy
+
+################################################################################
+# Nearest Neighbors
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(features_train, target_train)
+predictions = model.predict(features_test)
+
+accuracy = accuracy_score(predictions, target_test)
+print "KNN Accuracy Score: %f" % accuracy
