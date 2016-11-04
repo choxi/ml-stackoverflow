@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score
 data            = pandas.read_csv("data/2015 Stack Overflow Developer Survey Responses.csv", header=1)
 data            = data[pandas.notnull(data["Compensation"]) & (data["Compensation"] != 'Rather not say')]
 target          = data["Compensation"]
-feature_names   = ["Country"]
+feature_names   = ["Country", "Age"]
 features        = pandas.DataFrame([])
 
 for feature in feature_names:
