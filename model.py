@@ -4,6 +4,7 @@ from sklearn.model_selection    import train_test_split
 from sklearn.metrics            import accuracy_score
 from sklearn.neighbors          import KNeighborsClassifier
 from sklearn.ensemble           import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 data            = pandas.read_csv("data/2015 Stack Overflow Developer Survey Responses.csv", header=1)
 data            = data[pandas.notnull(data["Compensation"]) & (data["Compensation"] != 'Rather not say')]
@@ -61,3 +62,12 @@ predictions = model.predict(features_test)
 
 accuracy = accuracy_score(predictions, target_test)
 print "GB Accuracy Score: %f" % accuracy
+
+################################################################################
+# Random Forest
+model = RandomForestClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+model.fit(features_train, target_train)
+predictions = model.predict(features_test)
+
+accuracy = accuracy_score(predictions, target_test)
+print "RF Accuracy Score: %f" % accuracy
